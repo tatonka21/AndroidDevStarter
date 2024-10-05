@@ -1,6 +1,7 @@
 package com.example.roximity.androiddevstarter;
 
 import android.content.Context;
+import io.github.pixee.security.ObjectInputFilters;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,6 +28,7 @@ public final class InternalStorage{
     public static Object readObject(Context context, String key) throws IOException, ClassNotFoundException {
         FileInputStream fis = context.openFileInput(key);
         ObjectInputStream ois = new ObjectInputStream(fis);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
         return ois.readObject();
     }
 
